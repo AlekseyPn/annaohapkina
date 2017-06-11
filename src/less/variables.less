@@ -13,18 +13,17 @@
 
 @color-main:                #dfdfdf;
 @color-second:              #d2d2d2;
-
-@text-color:                #000;
-@theme-color:               #333;
-@second-theme-color:        #444;
-@body-bg:                   #fff;
+@color-hover:               #c8c1fb;
+@error:                     #fd9a9a;
 
 @link-color:                  @black;
-@link-color--hover:           @gray-darken;
+@link-color--hover:           @color-hover;
 
 @border-color:                @gray;
 // Типографика
 @font-size:                   1.6rem;
+@font-size--middle:           3rem;
+@font-size--big:              8rem;
 @font-size--h1:               3.6rem;
 @font-size--h2:               3rem;
 @font-size--h3:               2.4rem;
@@ -34,7 +33,9 @@
 
 @line-height:                 1.375em;
 
-@font-family:                 'Roboto', Arial, sans-serif; 
+@font-family:                 'Open Sans', Verdana, Tahoma, Geneva, sans-serif;
+@font-family--service:        'Philosopher', 'Open Sans', Tahoma, Geneva, sans-serif; 
+@font-family--form:        'Philosopher', 'Open Sans', Tahoma, Geneva, sans-serif; 
 @font-family--serif:          Georgia, 'Times New Roman', Times, serif; 
 @font-family--monospace:      Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; 
 @font-family--headings:       @font-family; 
@@ -42,8 +43,9 @@
 
 
 // Размеры экранов
-@screen-xs:                   0;
-@screen-sm:                   480px;
+@screen-xs:                   275px;
+@screen-s:                    375px;
+@screen-sm:                   425px;
 @screen-md:                   768px;
 @screen-lg:                   992px;
 @screen-xl:                   1200px;

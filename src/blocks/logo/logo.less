@@ -1,0 +1,18 @@
+// Для импорта в диспетчер подключений: @import './src/blocks/logo/logo.less';
+
+@import '../../less/variables.less';     // только для удобства обращения к переменным
+
+
+.logo {   
+    text-align: center;
+}
+
+.logo__picture {
+    width: 200px;
+}
+
+@media(min-width: @screen-md) {
+    .logo__picture {
+        width: 400px;
+    }
+}

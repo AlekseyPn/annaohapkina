@@ -10,7 +10,7 @@ const autoprefixer = require('autoprefixer');
 const mqpacker = require('css-mqpacker'); //Для сортировки медиа запросов.
 const minify = require('gulp-csso');
 const rename = require('gulp-rename'); //Для перемеинования CSS файла.
-const imagemin = require('gulp-imagemin');
+const image = require('gulp-image');
 const svgmin = require('gulp-svgmin');
 const svgstore = require('gulp-svgstore');
 const del = require('del');
@@ -20,6 +20,7 @@ const fileinclude = require('gulp-file-include');
 const concat = require('gulp-concat');
 const newer = require('gulp-newer');
 const replace = require('gulp-replace');
+const jade = require('gulp-jade');
 const server = require('browser-sync');
 const run = require('run-sequence'); //Для запуска build
 
@@ -32,6 +33,7 @@ gulp.task('style', function () {
         .pipe(postcss([
             autoprefixer({
                 browsers: [
+                    '> 1%',
                     'last 1 version',
                     'last 2 Chrome versions',
                     'last 2 Firefox versions',
@@ -58,68 +60,74 @@ gulp.task('clean', function () {
 gulp.task('copy', function () {
     console.log('Копирование файлов')
     return gulp.src([
-            dirs.source + '/image/**',            
             dirs.source + '/fonts/**/*.{woff, woff2}',
             dirs.source + '/*.html',
-            dirs.source + '/*.php'            
+            dirs.source + '/*.php',
+            dirs.source + '/global/js/*.js',
+            dirs.source + '/*.json',
+            dirs.source + '/*.xml'
         ], {
             base: dirs.source
-        })        
-        .pipe(gulp.dest(dirs.build))    
+        })
+        .pipe(gulp.dest(dirs.build))
 });
 
 
 gulp.task('clean-icons-folder', function () {
     console.log('Удаляем папку icons')
-    return del(dirs.build + '/image/icons');
+    return del(dirs.build + '/image/icon');
 });
 
-gulp.task('jshandler', function() {
+gulp.task('jshandler', function () {
     console.log('Обработка JS')
-    return gulp.src([ dirs.node + '/jquery/dist/jquery.js',dirs.node + '/slick-carousel/slick/slick.js', dirs.source + '/blocks/**/*.js'])
+    return gulp.src([dirs.node + '/jquery/dist/jquery.js', dirs.node + '/slick-carousel/slick/slick.js', dirs.node + '/masonry-layout/dist/masonry.pkgd.js', dirs.node + '/imagesloaded/imagesloaded.pkgd.js', dirs.source + '/blocks/**/*.js'])
         .pipe(concat('script.min.js'))
         .pipe(plumber())
+        .pipe(gulp.dest(dirs.build + '/js'))
         .pipe(uglify())
         .pipe(gulp.dest(dirs.build + '/js'))
 })
 
 
-gulp.task('images', function () {
+gulp.task('image', function () {
     console.log('Оптимизизация изображений');
-    return gulp.src(dirs.build + '/image/**/*.{png,jpg,gif}')
-        .pipe(newer( dirs.build + '/image'))
-        .pipe(imagemin([
-            imagemin.optipng({
-                optimizationlevel: 3
-            }),
-            imagemin.jpegtran({
-                progressive: true
-            })
-        ]))
+    return gulp.src(dirs.source + '/image/**/*.{png,jpg,gif}')
+        .pipe(newer(dirs.build + '/image/**/*.{png,jpg,gif}'))
+        .pipe(image({
+            pngquant: true,
+            optipng: false,
+            zopflipng: false,
+            jpegRecompress: false,
+            jpegoptim: true,
+            mozjpeg: true,
+            guetzli: false,
+            gifsicle: true,
+            svgo: true,
+            concurrent: 10
+        }))
         .pipe(gulp.dest(dirs.build + '/image'));
 });
 
 gulp.task('svg-min', function () {
-    return gulp.src( dirs.build + '/image/*.svg')
-        .pipe(newer( dirs.build + '/image'))
+    return gulp.src(dirs.build + '/image/*.svg')
+        .pipe(newer(dirs.build + '/image'))
         .pipe(svgmin())
-        .pipe(gulp.dest( dirs.build + '/image'));
+        .pipe(gulp.dest(dirs.build + '/image'));
 });
 
 gulp.task('symbols', function () {
-    return gulp.src( dirs.build + '/image/icons/*.svg')
-        .pipe(newer( dirs.build + '/image'))
+    return gulp.src(dirs.source + '/image/icons/*.svg')        
         .pipe(svgmin())
         .pipe(svgstore({
             inlineSvg: true
         }))
         .pipe(rename('symbols.svg'))
-        .pipe(gulp.dest( dirs.build + '/image'));
+        .pipe(gulp.dest(dirs.build + '/image'));
 });
 
-gulp.task('html', function () {
+gulp.task('jade', function () {
     console.log('Компиляция HTML');
-    return gulp.src([ dirs.source + '/*.html'])
+    return gulp.src([dirs.source + '/*.jade'])
         .pipe(plumber({
             errorHandler: function (err) {
                 notify.onError({
@@ -129,10 +137,8 @@ gulp.task('html', function () {
                 this.emit('end');
             }
         }))
-        .pipe(fileinclude({
-            prefix: '@@',
-            basepath: '@file',
-            indent: true
+        .pipe(jade({
+            pretty: true
         }))
         .pipe(replace(/\n\s*<!--DEV[\s\S]+?-->/gm, ''))
         .pipe(gulp.dest(dirs.build));
@@ -142,25 +148,24 @@ gulp.task('serve', function () {
     server.init({
         server: 'build'
     });
-
+    gulp.watch(dirs.source + '/image/**/*.{png,jpg,gif}', ['image']);
+    gulp.watch(dirs.source + '/image/**/*.svg', ['svg-min', 'symbols']);
     gulp.watch(dirs.source + '/**/*.less', ['style']);
     gulp.watch(dirs.source + '/**/*.js', ['jshandler']);
-    gulp.watch(dirs.source + '/**/*.html', ['html']).on('change', server.reload);
+    gulp.watch(dirs.source + '/**/*.jade', ['jade']).on('change', server.reload);
 });
 
 gulp.task('build', function (fn) {
     run(
         'clean',
-        'copy',        
-        'html',        
+        'copy',
+        'jade',
         'style',
-        'images',
-        'svg-min',
+        'image',
         'symbols',
+        'svg-min',
         'clean-icons-folder',
         'jshandler',
         fn
     );
 });
-
-

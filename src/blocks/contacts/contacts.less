@@ -1,0 +1,120 @@
+.contacts {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.contacts__info {
+    font-family: @font-family--form;
+    text-align: center;
+}
+
+.contacts__wrapper {
+    width: 100%;
+}
+
+.contacts__text {
+    font-size: @font-size;
+    letter-spacing: 2px;    
+    text-transform: uppercase;
+    &--min {
+        display: block;
+        margin-bottom: 20px;
+        font-size: @font-size - 0.4;
+    }
+}
+
+.contacts__link {
+    transition: color @transition-time ease-out;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.contacts__info {
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.contacts__form {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.contacts__label {
+    display: block;
+    width: 100%;    
+}
+
+.contacts__input {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: @font-size - 0.4;
+    font-family: @font-family--form;
+    letter-spacing: 1px;    
+    border: none;
+    border-bottom: 1px solid @gray-lighten;
+    box-sizing: border-box;
+    outline: none;
+    &::placeholder {
+        text-transform: uppercase;
+    }    
+    &:hover,
+    &:focus {
+        border-bottom: 1px solid @color-hover
+    }
+}
+
+.contacts__submit {
+    display: inline-block;
+    width: 40%;
+    padding: 10px;
+    border: 1px solid @gray-lighten;
+    border-radius: 10px;
+    font-size: @font-size - 0.4;
+    color: @gray-light;
+    text-transform: uppercase;
+    background-color: transparent;
+    outline: none;
+    transition: all @transition-time ease-out;
+    &:hover,
+    &:focus {
+        color: @white;
+        border: 1px solid @color-hover;
+        background-color: @color-hover;
+        outline: none;
+    }
+}
+
+.contacts__thankyou {
+    font-family: @font-family--form;
+    font-size: @font-size + 0.4;
+}
+
+@media(min-width: @screen-md) {
+    .contacts {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .contacts__wrapper {
+        padding-left: 50px;
+        box-sizing: border-box;
+    }
+
+    .contacts__picture {
+      margin-right: 1%;
+    }   
+}
+
+.error {
+    border-bottom: 1px solid @error;
+    &:hover,
+    &:focus {
+        border-color: @error;
+    }
+}

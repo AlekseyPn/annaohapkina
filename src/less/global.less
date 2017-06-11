@@ -5,17 +5,21 @@ html {
  -ms-overflow-style: scrollbar; 
  -ms-text-size-adjust: 100%;
   min-width: 320px; 
-  min-height: 100%; 
-} 
+  min-height: 100%;   
+}
 
+.visually-hidden {
+    font-size: 0;
+    text-indent: -9999px;
+}
 
 body {
+    margin: 0;
     font-size: @font-size;
     font-family: @font-family;
     font-weight: 400;
-    color: @text-color;
+    color: @black;
 }
-
 
 img {
     vertical-align: top;
@@ -94,7 +98,7 @@ h6 {
 @media (min-width: @screen-sm)  {
     .column-width-xs (@index) when (@index < @amount) {
     &.col-xs-@{index} {
-       width: @index * (@item-width / @amount);
+       width: @index * (@item-width / @amount) - 1;
     }
     .column-width-xs(@index + 1);
 }
@@ -104,7 +108,7 @@ h6 {
 @media (min-width: @screen-md) {
     .column-width-md (@index) when (@index < @amount) {
     &.col-md-@{index} {
-        width: @index * (@item-width / @amount);
+        width: @index * (@item-width / @amount) - 1;
     }
     .column-width-md(@index + 1);
 }
@@ -114,7 +118,7 @@ h6 {
 @media (min-width: @screen-lg) {
     .column-width-lg (@index) when (@index < @amount) {
     &.col-lg-@{index} {
-        width: @index * (@item-width / @amount);
+        width: @index * (@item-width / @amount) - 1;
     }
     .column-width-lg(@index + 1);
 }

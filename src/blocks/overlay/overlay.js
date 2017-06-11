@@ -1,1 +1,0 @@
-var overlay = document.querySelector(".overlay");

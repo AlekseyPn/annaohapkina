@@ -22,7 +22,8 @@
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^2.0.0",
     "gulp-file-include": "^1.0.0",
-    "gulp-imagemin": "^3.1.1",
+    "gulp-image": "^2.9.0",
+    "gulp-jade": "^1.1.0",
     "gulp-less": "3.1.0",
     "gulp-newer": "^1.3.0",
     "gulp-notify": "^3.0.0",
@@ -34,13 +35,17 @@
     "gulp-svgstore": "^6.1.0",
     "gulp-uglify": "^2.0.0",
     "i": "^0.3.5",
+    "masonry-layout": "^4.2.0",
     "mkdirp": "^0.5.1",
     "pixel-glass": "^1.0.10",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "slick-carousel": "^1.6.0"
   },
   "dependencies": {
+    "gulp-imagemin": "^3.3.0",
+    "imagemin-pngquant": "^5.0.1",
+    "imagesloaded": "^4.1.2",
     "jquery": "^3.1.1",
-    "swipejs": "^2.2.4",
     "slick-carousel": "1.6.0"
   },
   "scripts": {

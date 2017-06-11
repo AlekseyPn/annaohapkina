@@ -1,26 +1,100 @@
 .main-nav {
-
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: transparent;
+    z-index: 20;
 }
 
-.main__list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+.main-nav--close .main-nav__list {
+    transform: translateY(-150%);
+}
+.main-nav__list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    flex-direction: column;    
+    margin: 0;
+    padding: 0;    
+    margin-left: auto;
+    text-align: center;
+    background-color: @white;
+    transition: transform @transition-time linear;
+    z-index: 1;
 }
 
 .main-nav__item {
-
+    width: 100%;
+    padding: 10px 0;
+    list-style: none;    
 }
 
 .main-nav__link {
     display: block;
+    font-size: @font-size;
+    text-transform: uppercase;
+    transition: all @transition-time linear;
+    outline: none;
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: @color-hover;        
+    }
+}
+
+.main-nav__mobile-logo {
+    margin: 0;
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 @media (min-width: @screen-md) {
+    .main-nav{
+        position: static;
+        background-color: transparent;        
+    }
+    .main-nav__list {
+        position: static;
+        flex-direction: row;
+        justify-content: center;       
+        width: auto;       
+        background-color: transparent; 
+    }
+    .main-nav--close .main-nav__list {
+        transform:translateX(0) 
+    }
 
+    .main-nav__item {
+        position: relative;
+        width: auto;
+        padding-right: 20px;
+        margin-right: 40px;
+        border-top: none;
+        &::before {
+            content: '\2022';
+            position: absolute;
+            right: -15px;
+            top: 19px;
+            font-size: 1.5rem;
+            line-height: 0;
+            color: @black;
+        }
+        &:last-child {
+            margin-right: 0px;            
+            &::before {
+                display: none;
+            }
+        }
+    }
+    .main-nav__link {
+        font-size: @font-size - 0.2;       
+    }
 }
 
-@media (min-width: @screen-xl) {
+@media (min-width: @screen-lg) {
     
 }

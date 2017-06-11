@@ -1,2 +1,38 @@
+// Для импорта в диспетчер подключений: @import './src/blocks/social/social.less';
+
+@import '../../less/variables.less';     // только для удобства обращения к переменным
 
 
+.social {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: baseline;     
+    padding: 20px 0;    
+}
+
+.social__link {
+    margin-right: 10px;
+    font-size: 0;
+    cursor: pointer;    
+    &:last-child {
+        margin-right: 0;
+    }  
+    &:hover .social__icon {
+        fill: @color-hover;                
+    }      
+}
+
+.social__icon {
+    width: 20px;
+    height: 20px;
+    fill: #9c9c9e;
+    transition: all @transition-time linear;      
+}
+
+@media(min-width: @screen-md) {
+    .social__icon {
+        width: 25px;
+        height: 25px;
+    }
+}

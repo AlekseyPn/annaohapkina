@@ -1,0 +1,23 @@
+.section.contacts
+    .wrap.flex-wrap
+        .contacts__picture.col-lg-6.col-md-6.col-xs-12
+            img(src="image/contacts.jpg" alt="Анна Охапкина")
+        .contacts__wrapper.col-lg-6.col-md-6.col-xs-12
+            .contacts__info
+                p.contacts__text Со мной можно связаться
+                a.contacts__link(href="tel:89506494671") 89506494671
+                include ../../blocks/social/social
+                span.contacts__text.contacts__text--min или
+                p.contacts__text Напишите мне письмо
+            form.contacts__form#feedback
+                label.contacts__label
+                    input.contacts__input(type="text" id="name" name="name" placeholder="Ваше имя")
+                label.contacts__label
+                    input.contacts__input(type="email" id="email" name="email" placeholder="Ваш E-mail")
+                label.contacts__label
+                    input.contacts__input(type="tel" id="tel" name="tel" placeholder="Ваш номер телефона*" required)
+                label.contacts__label
+                    textarea.contacts__input(type="textarea" id="question" name="question" placeholder="Ваш вопрос?" cols="30" rows="10")
+                button.contacts__submit#feedbackSubmit(type="submit") Отправить
+                p.contacts__thankyou 
+                 
