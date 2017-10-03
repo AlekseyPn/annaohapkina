@@ -92,7 +92,7 @@ gulp.task('jshandler', function () {
 gulp.task('image', function () {
     console.log('Оптимизизация изображений');
     return gulp.src(dirs.source + '/image/**/*.{png,jpg,gif}')
-        .pipe(newer(dirs.build + '/image/**/*.{png,jpg,gif}'))
+        .pipe(newer(dirs.build + '/image'))
         .pipe(image({
             pngquant: true,
             optipng: false,

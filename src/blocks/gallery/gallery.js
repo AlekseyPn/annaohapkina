@@ -36,6 +36,10 @@ if (window.location.toString().indexOf("gallery.html") > 0) {
     }
 
     drawGallery();    
-    $(preloader).addClass('gallery__text--hidden');
-    $(gallery).addClass('gallery__wrapper--show');        
+    setTimeout(function(){
+        $(preloader).addClass('gallery__text--hidden');
+        if($(preloader).hasClass('gallery__text--hidden')) {
+            $(gallery).addClass('gallery__wrapper--show');
+        }  
+    }, 2000);         
 }

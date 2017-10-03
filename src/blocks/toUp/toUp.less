@@ -1,0 +1,22 @@
+.toUp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: 2px solid @gray;
+    border-radius: 50%;
+    background-color: @color-hover;    
+    opacity: 0;
+    &--show {
+        opacity: 1;
+    }
+    svg {
+        fill: @gray;
+    }
+}
+
+@media(min-width: @screen-md) {
+    .toUp {
+        right: 5%;
+        bottom: 50px;
+    }
+}

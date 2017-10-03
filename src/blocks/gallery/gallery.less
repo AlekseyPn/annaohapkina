@@ -4,20 +4,24 @@
 
 .gallery__text {
     display: inline-block;
+    vertical-align: top;
     padding: 200px 0;
-    font-size: 6rem;
+    font-size: 2.4rem;
+    text-align: center;
     &--hidden {
         display: none;
     }
 }
 
 .gallery__wrapper {
-    display: none;
+    height: 0;    
     padding-top: 20px;
     padding-bottom: 20px;    
+    opacity: 0;
     .clearfix();
     &--show {
-        display: block;
+        height: auto;
+        opacity: 1;
     }
 }
 
@@ -42,12 +46,16 @@
     .gallery__gutter {
         width: 1%;
     }
+
+    .gallery__text {
+        font-size: 6rem;
+    }
 }
 
 @media(min-width: @screen-lg) {
     .gallery__sizer,
     .gallery__item {
-        width: 23%;
+        width: 32%;
     }
     .gallery__gutter {
         width: 1%;
